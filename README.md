@@ -1,4 +1,4 @@
-# DEC Hodge-Laplacian Simulation
+# DEC Hodge-Laplacian Simulations
 
 This repository implements Discrete Exterior Calculus (DEC) simulations for solving the 2D Hodge-Laplacian problem on triangular meshes.
 
