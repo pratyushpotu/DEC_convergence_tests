@@ -7,14 +7,14 @@ This repository implements Discrete Exterior Calculus (DEC) simulations for solv
 ```
 dec_poisson_sim/
 ├── dec/                    # Core DEC operators and utilities
-│   ├── hodge.py            # Hodge star implementations (*0, *1, *2)
-│   ├── operators.py        # Discrete exterior derivatives (d0, d1)
-│   ├── integrators.py      # Integration routines for forms
-│   └── rhs.py              # Manufactured solution and source terms
+│   ├── hodge.py            # Hodge stars (*0, *1, *2)
+│   ├── derivatives.py      # Discrete exterior derivatives (d0, d1)
+│   ├── integrators.py      # de-Rham maps
+│   └── manufacturing.py    # Manufactured solution and rhs terms
 │
 ├── mesh/
 │   ├── generation.py       # Mesh generator for symmetric triangle mesh
-│   └── perturbed.py        # Mesh generator for perturbed triangle mesh
+│   └── geometry.py         # Functions for triangle geometry
 │
 ├── experiments/
 │   ├── k0_symmetric.py
@@ -52,7 +52,7 @@ Each case is tested on both:
 ## Requirements
 
 - Python 3.8+
-- `numpy`, `scipy`, `matplotlib` (for visualization)
+- `numpy`, `scipy`, `sympy`, `matplotlib` (for visualization)
 
 Install dependencies with:
 
