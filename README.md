@@ -9,12 +9,13 @@ dec_poisson_sim/
 ├── dec/                    # Core DEC operators and utilities
 │   ├── hodge.py            # Hodge stars (*0, *1, *2)
 │   ├── derivatives.py      # Discrete exterior derivatives (d0, d1)
-│   ├── integrators.py      # de-Rham maps
-│   └── manufacturing.py    # Manufactured solution and rhs terms
+│   └── integrators.py      # de-Rham maps
+│   
 │
 ├── mesh/
 │   ├── generation.py       # Mesh generator for symmetric triangle mesh
-│   └── geometry.py         # Functions for triangle geometry
+│   ├── geometry.py         # Functions for triangle geometry
+│   └── plotting.py         # Mesh plotting
 │
 ├── experiments/
 │   ├── k0_symmetric.py
@@ -22,7 +23,8 @@ dec_poisson_sim/
 │   ├── k1_symmetric.py
 │   ├── k1_perturbed.py
 │   ├── k2_symmetric.py
-│   └── k2_perturbed.py
+│   ├── k2_perturbed.py
+│   └── manufacturing.py    # Manufactured solution and rhs terms
 │
 ├── tests/                  # Unit tests for each module
 └── README.md
