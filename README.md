@@ -1,4 +1,4 @@
-# DEC Poisson Simulation
+# DEC Hodge-Laplacian Simulation
 
 This repository implements Discrete Exterior Calculus (DEC) simulations for solving the 2D Hodge-Laplacian problem on triangular meshes.
 
