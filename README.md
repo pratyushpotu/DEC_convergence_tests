@@ -5,7 +5,7 @@ This repository implements Discrete Exterior Calculus (DEC) simulations for solv
 ## Structure
 
 ```
-dec_poisson_sim/
+DEC_convergence_tests/
 ├── dec/                    # Core DEC operators and utilities
 │   ├── hodge.py            # Hodge stars (*0, *1, *2)
 │   ├── derivatives.py      # Discrete exterior derivatives (d0, d1)
