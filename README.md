@@ -62,6 +62,4 @@ Install dependencies with:
 pip install -r requirements.txt
 ```
 
-## License
-
-MIT License
+What the DEC are you doing down here...
