@@ -42,10 +42,10 @@ Each script computes convergence data over a sequence of mesh resolutions, then 
 
 ## Experiments
 
-Each experiment solves the DEC Hodge Laplacian for:
-- **0-forms**
-- **1-forms**
-- **2-forms**
+Each experiment solves the DEC Hodge Laplacian problem for:
+- **0-forms** (2D)
+- **1-forms** (2D)
+- **2-forms** (2D)
 
 Each case is tested on both:
 - A **symmetric** barycentrically subdivided equilateral triangle mesh
