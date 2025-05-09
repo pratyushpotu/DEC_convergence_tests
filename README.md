@@ -42,14 +42,11 @@ Each script computes convergence data over a sequence of mesh resolutions, then 
 
 ## Experiments
 
-Each experiment solves the DEC Hodge Laplacian problem for:
-- **0-forms** (2D)
-- **1-forms** (2D)
-- **2-forms** (2D)
+Each experiment solves the DEC Hodge Laplacian problem in 2 dimensions on 0 forms, 1 forms, and 2 forms.
 
 Each case is tested on both:
-- A **symmetric** barycentrically subdivided equilateral triangle mesh
-- A **perturbed** mesh where interior points are shifted slightly
+- A **symmetric** equilateral triangle mesh
+- A **perturbed** mesh where interior points of the symmetric mesh are shifted slightly
 
 ## Requirements
 
@@ -61,5 +58,141 @@ Install dependencies with:
 ```bash
 pip install -r requirements.txt
 ```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 What the DEC are you doing down here...
