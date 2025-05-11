@@ -6,7 +6,7 @@ from dec.derivatives import build_d0, build_d1
 from dec.hodge import build_H0, build_H1
 from experiments.manufacturing import u_ex, f_rhs
 
-resolutions = [4,8,16,32,64,128,256,512]
+resolutions = [4,8,16,32,64,128,256,512,1024,2048]
 errors_e_u = []
 errors_de_u = []
 hs = []

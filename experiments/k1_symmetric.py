@@ -7,19 +7,22 @@ from dec.hodge import build_H0, build_H1, build_H2
 from dec.integrators import compute_1_cochain
 from experiments.manufacturing import u_vector, f_vector, delta_u
 
-resolutions = [4,8,16,32,64,128,256,512]
+resolutions = [4,8,16,32,64,128,256,512,1024,2048]
 
 hs = []
 errors_e_u = []
 errors_de_u = []
 errors_e_rho  = []
+errors_de_rho = []
 
 with open("k1_symmetric_convergence.txt", "w") as f_out:
     # Header: n, h, e_u, rate_e_u, de_u, rate_de_u, e_rho, rate_e_rho
     f_out.write(f"{'n':>4} {'h':>8} {'e_u error':>12} {'e_u rate':>10} "
                 f"{'de_u error':>12} {'de_u rate':>10} "
-                f"{'e_rho error':>12} {'e_rho rate':>12}\n")
-    f_out.write("-" * 96 + "\n")
+                f"{'e_rho error':>12} {'e_rho rate':>12} "
+                f"{'de_rho_err':>15} {'rate_de_rho':>14}\n"
+            )
+    f_out.write("-" * 132 + "\n")
 
     for i, n in enumerate(resolutions):
         points, triangles = generate_mesh(n)
@@ -60,6 +63,11 @@ with open("k1_symmetric_convergence.txt", "w") as f_out:
         err_e_rho = np.sqrt((e_rho.T @ (H0 @ e_rho)))
         errors_e_rho.append(err_e_rho)
 
+        #|||de_rho|||
+        de_rho = d0 @ e_rho
+        err_de_rho = np.sqrt(de_rho.T @ (H1 @ de_rho))
+        errors_de_rho.append(err_de_rho)
+
         h = 1.0 / n
         hs.append(h)
 
@@ -67,12 +75,17 @@ with open("k1_symmetric_convergence.txt", "w") as f_out:
             f_out.write(f"{n:4d} {h:8.4f} "
                         f"{err_e_u:12.4e} {'-':>10} "
                         f"{err_de_u:12.4e} {'-':>10} "
-                        f"{err_e_rho:12.4e} {'-':>12}\n")
+                        f"{err_e_rho:12.4e} {'-':>12} "
+                        f"{err_de_rho:15.4e} {'-':>14}\n"
+            )
         else:
             rate_e_u     = np.log(errors_e_u[i-1] / err_e_u) / np.log(hs[i-1]/h)
             rate_de_u    = np.log(errors_de_u[i-1] / err_de_u) / np.log(hs[i-1]/h)
             rate_e_rho   = np.log(errors_e_rho[i-1] / err_e_rho) / np.log(hs[i-1]/h)
+            rate_de_rho  = np.log(errors_de_rho[i-1] / err_de_rho) / np.log(hs[i-1]/h)
             f_out.write(f"{n:4d} {h:8.4f} "
                         f"{err_e_u:12.4e} {rate_e_u:10.2f} "
                         f"{err_de_u:12.4e} {rate_de_u:10.2f} "
-                        f"{err_e_rho:12.4e} {rate_e_rho:12.2f}\n")
+                        f"{err_e_rho:12.4e} {rate_e_rho:12.2f} "
+                        f"{err_de_rho:15.4e} {rate_de_rho:14.2f}\n"
+                    )

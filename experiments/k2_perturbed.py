@@ -12,14 +12,16 @@ resolutions = [4,8,16,32,64,128,256,512,1024,2048]
 hs = []
 errors_e_u = []
 errors_e_rho = []
+errors_de_rho = []
 
 with open("k2_perturbed_convergence.txt", "w") as f_out:
-    # Header: n, h, e_u error, e_u rate, e_rho error, e_rho rate
+    # Header: n, h, e_u error, e_u rate, e_rho error, e_rho rate, de_rho error, de_rho rate
     f_out.write(
-        f"{'n':>4} {'h':>8} {'e_u error':>12} {'e_u rate':>10} "
-        f"{'e_rho error':>15} {'e_rho rate':>12}\n"
+        f"{'n':>4} {'h':>8} {'e_u_err':>12} {'rate_u':>10} "
+        f"{'e_rho_err':>15} {'rate_rho':>12} "
+        f"{'de_rho_err':>15} {'rate_de_rho':>14}\n"
     )
-    f_out.write("-" * 66 + "\n")
+    f_out.write("-" * 108 + "\n")
 
     for i, n in enumerate(resolutions):
         points, triangles = generate_perturbed_mesh(n)
@@ -51,6 +53,11 @@ with open("k2_perturbed_convergence.txt", "w") as f_out:
         err_rho = np.sqrt((e_rho.T @ (H1 @ e_rho)))
         errors_e_rho.append(err_rho)
 
+        # |||d e_rho|||
+        de_rho = d1 @ e_rho
+        err_de_rho = np.sqrt(de_rho.T @ (H2 @ de_rho))
+        errors_de_rho.append(err_de_rho)
+
         h = 1.0 / n
         hs.append(h)
 
@@ -58,13 +65,16 @@ with open("k2_perturbed_convergence.txt", "w") as f_out:
             f_out.write(
                 f"{n:4d} {h:8.4f} "
                 f"{err_e_u:12.4e} {'-':>10} "
-                f"{err_rho:15.4e} {'-':>12}\n"
+                f"{err_rho:15.4e} {'-':>12} "
+                f"{err_de_rho:15.4e} {'-':>14}\n"
             )
         else:
-            rate_e = np.log(errors_e_u[i-1] / err_e_u) / np.log(hs[i-1]/h)
-            rate_rho  = np.log(errors_e_rho[i-1] / err_rho) / np.log(hs[i-1]/h)
+            rate_u       = np.log(errors_e_u[i-1]    / err_e_u)    / np.log(hs[i-1]/h)
+            rate_rho     = np.log(errors_e_rho[i-1]  / err_rho)    / np.log(hs[i-1]/h)
+            rate_de_rho  = np.log(errors_de_rho[i-1] / err_de_rho) / np.log(hs[i-1]/h)
             f_out.write(
                 f"{n:4d} {h:8.4f} "
-                f"{err_e_u:12.4e} {rate_e:10.2f} "
-                f"{err_rho:15.4e} {rate_rho:12.2f}\n"
+                f"{err_e_u:12.4e} {rate_u:10.2f} "
+                f"{err_rho:15.4e} {rate_rho:12.2f} "
+                f"{err_de_rho:15.4e} {rate_de_rho:14.2f}\n"
             )
